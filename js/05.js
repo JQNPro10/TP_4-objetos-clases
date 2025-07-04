@@ -5,12 +5,11 @@ Los métodos que se debe poder utilizar  son:
 mostrarGeneracion: este método debe mostrar un mensaje indicando a qué generación pertenece la persona creada y cual es el rasgo característico de esta generación.
 Para realizar este método tener en cuenta la siguiente tabla de generaciones:
 */
-
 class Persona {
-    constructor(nombre, edad, DNI, sexo, peso, altura, anioNacimiento) {
+    constructor(nombre, edad, sexo, peso, altura, anioNacimiento) {
         this.nombre = nombre;
         this.edad = edad;
-        this.DNI = DNI;
+        this.DNI = this.generaDNI();
         this.sexo = sexo;
         this.peso = peso;
         this.altura = altura;
@@ -45,6 +44,14 @@ class Persona {
         document.writeln(`Rasgo característico: ${rasgo}.<br>`);
     }
 
+    esMayorDeEdad() {
+        if (this.edad >= 18) {
+            document.writeln(`${this.nombre} es mayor de edad.<br>`);
+        } else {
+            document.writeln(`${this.nombre} no es mayor de edad.<br>`);
+        }
+    }
+
     mostrarDatos() {
         document.writeln(`<br>Datos de la persona:<br>`);
         document.writeln(`Nombre: ${this.nombre}<br>`);
@@ -53,22 +60,27 @@ class Persona {
         document.writeln(`Sexo: ${this.sexo}<br>`);
         document.writeln(`Peso: ${this.peso.toFixed(2)} kg<br>`);
         document.writeln(`Altura: ${this.altura.toFixed(2)} m<br>`);
-        document.writeln(`Año de nacimiento: ${this.anioNacimiento}<br><br>`);
+        document.writeln(`Año de nacimiento: ${this.anioNacimiento}<br>`);
+    }
+
+    generaDNI() {
+        return Math.floor(10000000 + Math.random() * 90000000);
     }
 }
 
-let persona1 = new Persona("Mateo", 25, "40123456", "H", 70, 1.75, 1999);
+let persona1 = new Persona("Mateo", 25, "H", 70, 1.75, 1999);
 persona1.mostrarDatos();
 persona1.mostrarGeneracion();
+persona1.esMayorDeEdad();
 
 let nombre = prompt("Ingrese el nombre:");
 let edad = parseInt(prompt("Ingrese la edad:"));
-let DNI = prompt("Ingrese el DNI:");
 let sexo = prompt("Ingrese el sexo (H/M):");
 let peso = parseFloat(prompt("Ingrese el peso en kg:"));
 let altura = parseFloat(prompt("Ingrese la altura en metros:"));
 let anioNacimiento = parseInt(prompt("Ingrese el año de nacimiento:"));
 
-let persona2 = new Persona(nombre, edad, DNI, sexo, peso, altura, anioNacimiento);
+let persona2 = new Persona(nombre, edad, sexo, peso, altura, anioNacimiento);
 persona2.mostrarDatos();
 persona2.mostrarGeneracion();
+persona2.esMayorDeEdad();
